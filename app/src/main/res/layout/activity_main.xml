@@ -5,54 +5,70 @@
     android:layout_height="match_parent"
     android:background="@color/primary">
 
+
+
     <RelativeLayout
-        android:paddingHorizontal="8dp"
-        android:id="@+id/toolbar"
+        android:id="@+id/search_container"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/nav_bar"
-            android:background="?selectableItemBackground"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_menu"
-            app:tint="@color/white" />
-
-        <RelativeLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_et"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@id/nav_bar">
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_search_field"
+            android:fontFamily="@font/roboto_400"
+            android:gravity="start"
+            android:hint="@string/search"
+            android:inputType="textFilter"
+            android:maxLength="40"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            android:scrollHorizontally="true"
+            android:text=""
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray3"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:background="@color/secondary" />
 
             <ImageView
-                android:id="@+id/search_iv"
-                android:layout_width="36dp"
-                android:background="?selectableItemBackground"
-                android:layout_height="36dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:padding="8dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/ic_search"
-                app:tint="@color/white" />
-        </RelativeLayout>
-
+                app:tint="@color/secondary" />
+        </LinearLayout>
     </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/search_container"
         android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/games_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
@@ -70,5 +86,6 @@
         android:gravity="center"
         android:text="@string/no_results"
         android:textSize="20sp"
+        android:textColor="@color/white"
         android:visibility="gone" />
 </RelativeLayout>

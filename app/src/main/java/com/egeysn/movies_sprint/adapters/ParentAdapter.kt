@@ -33,37 +33,40 @@ class ParentAdapter(
             val position = bindingAdapterPosition
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
             if (position == items.lastIndex) {
+                // TODO ADD DP TO PX
+                params.bottomMargin = 60
                 binding.root.layoutParams = params
             } else {
-                params.bottomMargin = 0
+                params.bottomMargin = 5
                 binding.root.layoutParams = params
             }
 
             binding.titleTv.text = item.type
+            binding.childRv.setHasFixedSize(true)
 
             when (item.type) {
                 "tv" -> {
-                    binding.titleTv.text = "TV"
+                    binding.titleTv.text = "TV Shows"
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(item.results)
+                        adapter = MoviesAdapter(context,item.results)
                     }
                 }
                 "person" -> {
-                    binding.titleTv.text = "Person"
+                    binding.titleTv.text = "Persons"
                     binding.childRv.apply {
-                        adapter = PersonAdapter(item.results)
+                        adapter = PersonAdapter(context,item.results)
                     }
                 }
                 "movie" -> {
-                    binding.titleTv.text = "Movie"
+                    binding.titleTv.text = "Movies"
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(item.results)
+                        adapter = MoviesAdapter(context,item.results)
                     }
                 }
                 else -> {
                     binding.titleTv.text = "Undefined"
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(item.results)
+                        adapter = MoviesAdapter(context,item.results)
                     }
                 }
             }

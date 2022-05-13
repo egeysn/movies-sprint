@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">movies-sprint</string>
     <string name="no_results">No results</string>
+    <string name="search">Search</string>
 </resources>

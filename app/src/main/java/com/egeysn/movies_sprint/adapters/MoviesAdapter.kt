@@ -14,12 +14,13 @@ import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.MoviesItemBinding
 
 class MoviesAdapter(
+    private val context: Context,
     private val items: List<ResultsItem>
 ) :
     ListAdapter<ResultsItem, MoviesAdapter.ViewHolder>(PersonTaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], items.size - 1)
+        holder.bind(context, items[position], items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,22 +32,24 @@ class MoviesAdapter(
     class ViewHolder private constructor(private val binding: MoviesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ResultsItem, size: Int) {
+        fun bind(context: Context, item: ResultsItem, size: Int) {
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
             when (bindingAdapterPosition) {
                 0 -> {
                     params.leftMargin =
-                        dpToPx(binding.root.context, 10)
+                        dpToPx(binding.root.context, 15)
                     binding.root.layoutParams = params
                 }
                 size - 1 -> {
+                    params.leftMargin =
+                        dpToPx(binding.root.context, 15)
                     params.rightMargin =
-                        dpToPx(binding.root.context, 20)
+                        dpToPx(binding.root.context, 15)
                     binding.root.layoutParams = params
                 }
                 else -> {
-                    params.leftMargin = 20
+                    params.leftMargin = 30
                     binding.root.layoutParams = params
                 }
             }
@@ -54,16 +57,17 @@ class MoviesAdapter(
             // create a ProgressDrawable object which we will show as placeholder
             val progress = CircularProgressDrawable(binding.root.context)
             progress.setColorSchemeColors(
-                R.color.secondary,
+                R.color.red_accent,
             )
             progress.centerRadius = 30f
             progress.strokeWidth = 5f
             progress.start()
 
-            Glide.with(binding.root.context)
+            Glide.with(context)
                 .load(BuildConfig.BASE_IMAGE_URL + item.poster_path)
                 .placeholder(progress)
                 .centerCrop()
+                .error(R.drawable.ic_baseline_error_outline_24)
                 .into(binding.imageIv)
         }
 

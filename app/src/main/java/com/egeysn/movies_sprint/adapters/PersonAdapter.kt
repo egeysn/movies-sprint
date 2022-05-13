@@ -15,12 +15,13 @@ import com.egeysn.movies_sprint.databinding.PersonsItemBinding
 
 
 class PersonAdapter(
+    private val context:Context,
     private val items: List<ResultsItem>
 ) :
     ListAdapter<ResultsItem, PersonAdapter.ViewHolder>(PersonTaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], items.size - 1)
+        holder.bind(context,items[position], items.size )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +33,7 @@ class PersonAdapter(
     class ViewHolder private constructor(private val binding: PersonsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ResultsItem, size: Int) {
+        fun bind(context:Context,item: ResultsItem, size: Int) {
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
             when (bindingAdapterPosition) {
@@ -42,12 +43,14 @@ class PersonAdapter(
                     binding.root.layoutParams = params
                 }
                 size - 1 -> {
+                    params.leftMargin =
+                        dpToPx(binding.root.context, 15)
                     params.rightMargin =
-                        dpToPx(binding.root.context, 20)
+                        dpToPx(binding.root.context, 30)
                     binding.root.layoutParams = params
                 }
                 else -> {
-                    params.leftMargin = 20
+                    params.leftMargin = 30
                     binding.root.layoutParams = params
                 }
             }
@@ -55,13 +58,13 @@ class PersonAdapter(
             // create a ProgressDrawable object which we will show as placeholder
             val progress = CircularProgressDrawable(binding.root.context)
             progress.setColorSchemeColors(
-                R.color.secondary,
+                R.color.red_accent,
             )
             progress.centerRadius = 30f
             progress.strokeWidth = 5f
             progress.start()
 
-            Glide.with(binding.root.context)
+            Glide.with(context)
                 .load(BuildConfig.BASE_IMAGE_URL + item.profile_path)
                 .placeholder(progress)
                 .centerCrop()

@@ -18,9 +18,10 @@
             android:layout_alignStart="@+id/child_rv"
             android:layout_alignParentTop="true"
             android:padding="12dp"
-            tools:text="Movies"
+            android:textSize="20sp"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Movies" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/child_rv"
