@@ -1,4 +1,4 @@
-package com.egeysn.video_games_sprint.utils
+package com.egeysn.movies_sprint.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

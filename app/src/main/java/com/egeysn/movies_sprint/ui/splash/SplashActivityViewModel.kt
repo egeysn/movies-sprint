@@ -1,6 +1,6 @@
-package com.egeysn.video_games_sprint.ui.splash
+package com.egeysn.movies_sprint.ui.splash
 
-import com.naylalabs.kotlinbaseproject.common.BaseViewModel
+import com.egeysn.movies_sprint.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

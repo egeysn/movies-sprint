@@ -1,4 +1,4 @@
-package com.naylalabs.kotlinbaseproject.common
+package com.egeysn.movies_sprint.data.common
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,11 +1,12 @@
-package com.egeysn.video_games_sprint.ui.splash
+package com.egeysn.movies_sprint.ui.splash
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import androidx.activity.viewModels
 import com.egeysn.movies_sprint.R
-import com.naylalabs.kotlinbaseproject.common.BaseActivity
+import com.egeysn.movies_sprint.data.common.BaseActivity
+import com.egeysn.movies_sprint.ui.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
@@ -22,7 +23,7 @@ class SplashActivity : BaseActivity() {
         val handler = Handler()
         handler.postDelayed(
             Runnable {
-                //startActivity(MainActivity.createSimpleIntent(this))
+                startActivity(MainActivity.createSimpleIntent(this))
             },
             2000
         )

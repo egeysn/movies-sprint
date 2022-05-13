@@ -1,4 +1,4 @@
-package com.egeysn.video_games_sprint.utils
+package com.egeysn.movies_sprint.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

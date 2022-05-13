@@ -24,12 +24,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
             buildConfigField "String", "API_KEY", "\"fb9830b267022f6d39d6f9b4685ec765\""
+            buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500/\""
         }
         debug {
             minifyEnabled false
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
             buildConfigField "String", "API_KEY", "\"fb9830b267022f6d39d6f9b4685ec765\""
+            buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500/\""
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

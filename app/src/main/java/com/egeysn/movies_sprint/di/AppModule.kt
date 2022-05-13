@@ -3,8 +3,8 @@ package com.egeysn.movies_sprint.di
 import android.app.Application
 import android.content.Context
 import com.egeysn.movies_sprint.BuildConfig
-import com.egeysn.video_games_sprint.data.remote.ApiService
-import com.egeysn.video_games_sprint.utils.NetworkUtils
+import com.egeysn.movies_sprint.data.remote.ApiService
+import com.egeysn.movies_sprint.utils.NetworkUtils
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

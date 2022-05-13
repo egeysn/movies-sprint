@@ -1,4 +1,4 @@
-package com.naylalabs.kotlinbaseproject.common
+package com.egeysn.movies_sprint.common
 
 import androidx.lifecycle.ViewModel
 
