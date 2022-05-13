@@ -8,7 +8,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.egeysn.movies_sprint.adapters.ParentAdapter
+import com.egeysn.movies_sprint.adapters.PopularMoviesAdapter
 import com.egeysn.movies_sprint.data.common.BaseActivity
 import com.egeysn.movies_sprint.data.general.ParentModel
 import com.egeysn.movies_sprint.data.general.ResultsItem
@@ -36,7 +38,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         adjustUI()
         listeners()
-        searchMultiSections("")
+        getPopularMovies()
     }
 
     private fun adjustUI() {
@@ -46,12 +48,13 @@ class MainActivity : BaseActivity() {
         viewModel.searchMultiSection(query).observe(this) {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    it.data?.let { it1 -> onMoviesFetched(it1) }
+                    it.data?.let { it1 -> onSearchMoviesFetched(it1) }
                     hideLoading()
                 }
                 Resource.Status.ERROR -> {
                     Timber.e("onError : ${it.message}")
                     binding.body.visibility = View.GONE
+                    binding.popularMoviesBody.visibility = View.GONE
                     binding.emptyList.visibility = View.VISIBLE
                     hideLoading()
                 }
@@ -63,21 +66,71 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun onMoviesFetched(response: SearchResponse) {
+    private fun getPopularMovies() {
+        viewModel.getPopularMovies().observe(this) {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    it.data?.let { it1 -> onPopularMoviesFetched(it1) }
+                    hideLoading()
+                }
+                Resource.Status.ERROR -> {
+                    Timber.e("onError : ${it.message}")
+                    binding.body.visibility = View.GONE
+                    binding.emptyList.visibility = View.VISIBLE
+                    binding.popularMoviesBody.visibility = View.GONE
+                    hideLoading()
+                }
+                Resource.Status.LOADING -> {
+                    showLoading()
+                }
+            }
+        }
+    }
+
+    private fun onPopularMoviesFetched(response: SearchResponse) {
         Timber.d("games list fetched")
         val resultList = response.results
-        val groupList =
-            resultList?.groupBy { it?.media_type }
-                ?.map { ParentModel(type = it.key, results = it.value as List<ResultsItem>) }
 
         if (resultList.isNullOrEmpty()) {
-            binding.body.visibility = View.GONE
-            binding.emptyList.visibility = View.VISIBLE
+            binding.apply {
+                body.visibility = View.GONE
+                emptyList.visibility = View.VISIBLE
+                popularMoviesBody.visibility = View.GONE
+            }
         } else {
-            binding.body.visibility = View.VISIBLE
-            binding.emptyList.visibility = View.GONE
-            val adapter = groupList?.let { ParentAdapter(this, it) }
-            binding.gamesRv.adapter = adapter
+            binding.apply {
+                body.visibility = View.GONE
+                emptyList.visibility = View.GONE
+                popularMoviesBody.visibility = View.VISIBLE
+                val adapter =
+                    PopularMoviesAdapter(this@MainActivity, resultList as List<ResultsItem>)
+                popularMoviesRv.adapter = adapter
+            }
+        }
+    }
+
+    private fun onSearchMoviesFetched(response: SearchResponse) {
+        Timber.d("games list fetched")
+        val resultList = response.results
+
+        if (resultList.isNullOrEmpty()) {
+            binding.apply {
+                body.visibility = View.GONE
+                emptyList.visibility = View.VISIBLE
+                popularMoviesBody.visibility = View.GONE
+            }
+        } else {
+            val groupList =
+                resultList.groupBy { it?.media_type }
+                    .map { ParentModel(type = it.key, results = it.value as List<ResultsItem>) }
+
+            binding.apply {
+                body.visibility = View.VISIBLE
+                binding.popularMoviesBody.visibility = View.GONE
+                emptyList.visibility = View.GONE
+                val adapter = ParentAdapter(this@MainActivity, groupList)
+                bodyRv.adapter = adapter
+            }
         }
     }
 
@@ -92,11 +145,11 @@ class MainActivity : BaseActivity() {
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {
                     input.let {
-                        delay(1000)
+                        delay(debouncePeriod)
                         if (it.length > 1) {
                             searchMultiSections(input)
                         } else {
-                            // viewModel.resetSearch()
+                            getPopularMovies()
                         }
                     }
                 }

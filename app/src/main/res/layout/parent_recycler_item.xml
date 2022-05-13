@@ -29,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title_tv"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            card_view:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            />
 
     </RelativeLayout>
 

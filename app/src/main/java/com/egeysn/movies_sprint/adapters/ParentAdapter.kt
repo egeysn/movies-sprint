@@ -3,6 +3,7 @@ package com.egeysn.movies_sprint.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.egeysn.movies_sprint.data.general.ParentModel
 import com.egeysn.movies_sprint.databinding.ParentRecyclerItemBinding
@@ -44,29 +45,33 @@ class ParentAdapter(
             binding.titleTv.text = item.type
             binding.childRv.setHasFixedSize(true)
 
+            val horizontalManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             when (item.type) {
                 "tv" -> {
                     binding.titleTv.text = "TV Shows"
+                    binding.childRv.layoutManager = horizontalManager
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(context,item.results)
+                        adapter = MoviesAdapter(context, item.results)
                     }
                 }
                 "person" -> {
                     binding.titleTv.text = "Persons"
+                    binding.childRv.layoutManager = horizontalManager
                     binding.childRv.apply {
-                        adapter = PersonAdapter(context,item.results)
+                        adapter = PersonAdapter(context, item.results)
                     }
                 }
                 "movie" -> {
                     binding.titleTv.text = "Movies"
+                    binding.childRv.layoutManager = horizontalManager
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(context,item.results)
+                        adapter = MoviesAdapter(context, item.results)
                     }
                 }
                 else -> {
                     binding.titleTv.text = "Undefined"
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(context,item.results)
+                        adapter = MoviesAdapter(context, item.results)
                     }
                 }
             }

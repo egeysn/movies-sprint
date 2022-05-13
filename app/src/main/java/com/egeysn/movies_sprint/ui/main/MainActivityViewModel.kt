@@ -14,4 +14,8 @@ class MainActivityViewModel @Inject constructor(val repository: NetworkRepositor
     fun searchMultiSection(query: String): LiveData<Resource<SearchResponse>> {
         return repository.searchMultiSection(query)
     }
+
+    fun getPopularMovies(): LiveData<Resource<SearchResponse>> {
+        return repository.getPopularMovies()
+    }
 }

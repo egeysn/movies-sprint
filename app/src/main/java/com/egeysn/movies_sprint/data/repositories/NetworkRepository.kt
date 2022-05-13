@@ -19,4 +19,13 @@ class NetworkRepository @Inject constructor(
                 )
             }
         }
+
+    fun getPopularMovies() =
+        performOperation {
+            getResult {
+                apiService.getPopularMovies(
+                    BuildConfig.API_KEY
+                )
+            }
+        }
 }

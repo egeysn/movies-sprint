@@ -20,6 +20,8 @@
     <color name="gray3">#9fa3a6</color>
     <color name="gray8">#8A9095</color>
 
+    <color name="item_background_color">#545657</color>
+
     <color name="red_accent">#ff1d56</color>
 
 </resources>
