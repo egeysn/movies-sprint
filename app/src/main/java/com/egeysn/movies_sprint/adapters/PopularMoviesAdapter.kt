@@ -3,6 +3,7 @@ package com.egeysn.movies_sprint.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -11,7 +12,6 @@ import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PopularMoviesItemBinding
-
 
 class PopularMoviesAdapter(
     private val context: Context,
@@ -35,19 +35,25 @@ class PopularMoviesAdapter(
         fun bind(context: Context, item: ResultsItem, size: Int) {
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
+            val imageWidth = dpToPx(context, 110f)
+            binding.imageCv.layoutParams = LinearLayout.LayoutParams(imageWidth, (imageWidth * (1.5)).toInt())
+
             when (bindingAdapterPosition) {
                 0 -> {
                     params.topMargin =
-                        dpToPx(binding.root.context, 15)
+                        dpToPx(binding.root.context, 15f)
+                    params.bottomMargin = 0
                     binding.root.layoutParams = params
                 }
                 size - 1 -> {
+                    params.topMargin = 0
                     params.bottomMargin =
-                        dpToPx(binding.root.context, 30)
+                        dpToPx(binding.root.context, 30f)
                     binding.root.layoutParams = params
                 }
                 else -> {
-                    params.topMargin =  dpToPx(binding.root.context,  10)
+                    params.topMargin = dpToPx(binding.root.context, 10f)
+                    params.bottomMargin = 0
                     binding.root.layoutParams = params
                 }
             }
@@ -69,12 +75,14 @@ class PopularMoviesAdapter(
                 .centerCrop()
                 .error(R.drawable.ic_baseline_error_outline_24)
                 .into(binding.imageIv)
+
+            binding.root.setOnClickListener {
+            }
         }
 
-        private fun dpToPx(context: Context, dp: Int): Int {
-            val dip: Float = dp.toFloat()
+        private fun dpToPx(context: Context, dp: Float): Int {
             val scale = context.resources.displayMetrics.density
-            return (dip * scale + 0.5f).toInt()
+            return (dp * scale + 0.5f).toInt()
         }
 
         companion object {

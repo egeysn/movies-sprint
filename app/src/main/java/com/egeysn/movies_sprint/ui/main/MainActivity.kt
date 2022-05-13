@@ -8,7 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.egeysn.movies_sprint.adapters.ParentAdapter
 import com.egeysn.movies_sprint.adapters.PopularMoviesAdapter
 import com.egeysn.movies_sprint.data.common.BaseActivity
