@@ -3,7 +3,6 @@ package com.egeysn.movies_sprint.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -12,6 +11,7 @@ import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.MoviesItemBinding
+import com.egeysn.movies_sprint.ui.movieDetail.MovieDetailActivity
 
 class MoviesAdapter(
     private val context: Context,
@@ -69,6 +69,10 @@ class MoviesAdapter(
                 .centerCrop()
                 .error(R.drawable.ic_baseline_error_outline_24)
                 .into(binding.imageIv)
+
+            binding.root.setOnClickListener {
+                context.startActivity(MovieDetailActivity.createSimpleIntent(context, item.id))
+            }
         }
 
         private fun dpToPx(context: Context, dp: Int): Int {
@@ -87,4 +91,3 @@ class MoviesAdapter(
         }
     }
 }
-

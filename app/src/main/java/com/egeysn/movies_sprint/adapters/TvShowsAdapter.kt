@@ -68,6 +68,8 @@ class TvShowsAdapter(
                 .centerCrop()
                 .error(R.drawable.ic_baseline_error_outline_24)
                 .into(binding.imageIv)
+
+            binding.root.setOnClickListener { }
         }
 
         private fun dpToPx(context: Context, dp: Int): Int {
