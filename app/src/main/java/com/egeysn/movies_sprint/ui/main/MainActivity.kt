@@ -10,11 +10,13 @@ import android.view.View
 import androidx.activity.viewModels
 import com.egeysn.movies_sprint.adapters.ParentAdapter
 import com.egeysn.movies_sprint.adapters.PopularMoviesAdapter
+import com.egeysn.movies_sprint.adapters.PopularMoviesItemListener
 import com.egeysn.movies_sprint.data.common.BaseActivity
 import com.egeysn.movies_sprint.data.general.ParentModel
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.data.response.SearchResponse
 import com.egeysn.movies_sprint.databinding.ActivityMainBinding
+import com.egeysn.movies_sprint.ui.movieDetail.MovieDetailActivity
 import com.egeysn.movies_sprint.utils.Resource
 import kotlinx.coroutines.*
 import timber.log.Timber
@@ -102,7 +104,14 @@ class MainActivity : BaseActivity() {
                 emptyList.visibility = View.GONE
                 popularMoviesBody.visibility = View.VISIBLE
                 val adapter =
-                    PopularMoviesAdapter(this@MainActivity, viewModel, resultList as List<ResultsItem>)
+                    PopularMoviesAdapter(
+                        this@MainActivity, viewModel, resultList as List<ResultsItem>,
+                        object : PopularMoviesItemListener {
+                            override fun onItemClicked(id: Int?) {
+                                MovieDetailActivity.createSimpleIntent(this@MainActivity,id!!)
+                            }
+                        }
+                    )
                 popularMoviesRv.adapter = adapter
             }
         }

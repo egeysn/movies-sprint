@@ -17,26 +17,29 @@ import com.egeysn.movies_sprint.ui.main.MainViewModel
 class PopularMoviesAdapter(
     private val context: Context,
     private val viewModel: MainViewModel,
-    private val items: List<ResultsItem>
+    private val items: List<ResultsItem>,
+    var listener: PopularMoviesItemListener?,
 ) :
     ListAdapter<ResultsItem, PopularMoviesAdapter.ViewHolder>(PersonTaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(context, viewModel, items[position], items.size)
+        holder.bind(viewModel, items[position], items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = PopularMoviesItemBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = items.size
 
-    class ViewHolder private constructor(private val binding: PopularMoviesItemBinding) :
+    inner class ViewHolder constructor(private val binding: PopularMoviesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         // TODO Can apply other adapters? Search after complete project. (viewModel, utils)
 
-        fun bind(context: Context, viewModel: MainViewModel, item: ResultsItem, size: Int) {
+        fun bind(viewModel: MainViewModel, item: ResultsItem, size: Int) {
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
             val imageWidth = viewModel.utils.dpToPx(110f)
@@ -81,16 +84,12 @@ class PopularMoviesAdapter(
                 .into(binding.imageIv)
 
             binding.root.setOnClickListener {
-            }
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): ViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = PopularMoviesItemBinding.inflate(layoutInflater, parent, false)
-
-                return ViewHolder(binding)
+                listener?.onItemClicked(item.id)
             }
         }
     }
+}
+
+interface PopularMoviesItemListener {
+    fun onItemClicked(id: Int?)
 }
