@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.data.remote.ApiService
+import com.egeysn.movies_sprint.utils.GeneralUtils
 import com.egeysn.movies_sprint.utils.NetworkUtils
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -40,6 +41,8 @@ object AppModule {
         val cacheSize: Long = 10 * 1024 * 1024
         return Cache(application.cacheDir, cacheSize)
     }
+
+
 
     @Singleton
     @Provides
@@ -107,4 +110,10 @@ object AppModule {
     @Singleton
     fun provideNetworkService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideGeneralUtils(@ApplicationContext context: Context): GeneralUtils {
+        return GeneralUtils(context)
+    }
 }

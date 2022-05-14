@@ -12,15 +12,17 @@ import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PopularMoviesItemBinding
+import com.egeysn.movies_sprint.ui.main.MainViewModel
 
 class PopularMoviesAdapter(
     private val context: Context,
+    private val viewModel: MainViewModel,
     private val items: List<ResultsItem>
 ) :
     ListAdapter<ResultsItem, PopularMoviesAdapter.ViewHolder>(PersonTaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(context, items[position], items.size)
+        holder.bind(context, viewModel, items[position], items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,27 +34,29 @@ class PopularMoviesAdapter(
     class ViewHolder private constructor(private val binding: PopularMoviesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(context: Context, item: ResultsItem, size: Int) {
+        // TODO Can apply other adapters? Search after complete project. (viewModel, utils)
+
+        fun bind(context: Context, viewModel: MainViewModel, item: ResultsItem, size: Int) {
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
-            val imageWidth = dpToPx(context, 110f)
+            val imageWidth = viewModel.utils.dpToPx(110f)
             binding.imageCv.layoutParams = LinearLayout.LayoutParams(imageWidth, (imageWidth * (1.5)).toInt())
 
             when (bindingAdapterPosition) {
                 0 -> {
                     params.topMargin =
-                        dpToPx(binding.root.context, 15f)
+                        viewModel.utils.dpToPx(15f)
                     params.bottomMargin = 0
                     binding.root.layoutParams = params
                 }
                 size - 1 -> {
                     params.topMargin = 0
                     params.bottomMargin =
-                        dpToPx(binding.root.context, 30f)
+                        viewModel.utils.dpToPx(30f)
                     binding.root.layoutParams = params
                 }
                 else -> {
-                    params.topMargin = dpToPx(binding.root.context, 10f)
+                    params.topMargin = viewModel.utils.dpToPx(10f)
                     params.bottomMargin = 0
                     binding.root.layoutParams = params
                 }
@@ -78,11 +82,6 @@ class PopularMoviesAdapter(
 
             binding.root.setOnClickListener {
             }
-        }
-
-        private fun dpToPx(context: Context, dp: Float): Int {
-            val scale = context.resources.displayMetrics.density
-            return (dp * scale + 0.5f).toInt()
         }
 
         companion object {

@@ -102,7 +102,7 @@ class MainActivity : BaseActivity() {
                 emptyList.visibility = View.GONE
                 popularMoviesBody.visibility = View.VISIBLE
                 val adapter =
-                    PopularMoviesAdapter(this@MainActivity, resultList as List<ResultsItem>)
+                    PopularMoviesAdapter(this@MainActivity, viewModel, resultList as List<ResultsItem>)
                 popularMoviesRv.adapter = adapter
             }
         }
