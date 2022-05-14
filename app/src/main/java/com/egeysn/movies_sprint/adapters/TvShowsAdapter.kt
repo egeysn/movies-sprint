@@ -3,7 +3,6 @@ package com.egeysn.movies_sprint.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -13,11 +12,11 @@ import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.MoviesItemBinding
 
-class MoviesAdapter(
+class TvShowsAdapter(
     private val context: Context,
     private val items: List<ResultsItem>
 ) :
-    ListAdapter<ResultsItem, MoviesAdapter.ViewHolder>(PersonTaskDiffCallback()) {
+    ListAdapter<ResultsItem, TvShowsAdapter.ViewHolder>(PersonTaskDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(context, items[position], items.size)
@@ -87,4 +86,3 @@ class MoviesAdapter(
         }
     }
 }
-

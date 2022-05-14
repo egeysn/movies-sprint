@@ -51,7 +51,7 @@ class ParentAdapter(
                     binding.titleTv.text = "TV Shows"
                     binding.childRv.layoutManager = horizontalManager
                     binding.childRv.apply {
-                        adapter = MoviesAdapter(context, item.results)
+                        adapter = TvShowsAdapter(context, item.results)
                     }
                 }
                 "person" -> {
