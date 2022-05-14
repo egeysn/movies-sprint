@@ -22,7 +22,7 @@ import timber.log.Timber
 @SuppressLint("CustomSplashScreen")
 class MainActivity : BaseActivity() {
 
-    private val viewModel: MainActivityViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     var debouncePeriod: Long = 1000
@@ -159,8 +159,9 @@ class MainActivity : BaseActivity() {
         })
     }
 
-    private fun destroy() {
+    override fun onDestroy() {
         searchJob?.cancel()
+        super.onDestroy()
     }
 
     companion object {

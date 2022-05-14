@@ -37,5 +37,4 @@ class NetworkUtils {
             return result
         }
     }
-
 }

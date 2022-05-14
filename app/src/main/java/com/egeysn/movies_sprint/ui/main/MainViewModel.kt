@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(val repository: NetworkRepository) : BaseViewModel() {
+class MainViewModel @Inject constructor(val repository: NetworkRepository) : BaseViewModel() {
 
     fun searchMultiSection(query: String): LiveData<Resource<SearchResponse>> {
         return repository.searchMultiSection(query)
