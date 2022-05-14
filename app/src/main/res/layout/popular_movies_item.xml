@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="10dp"
     android:foreground="?selectableItemBackground"
     android:orientation="horizontal"
-    app:cardBackgroundColor="@color/item_background_color"
+    app:cardBackgroundColor="@color/search_background"
     app:cardCornerRadius="12dp">
 
     <LinearLayout

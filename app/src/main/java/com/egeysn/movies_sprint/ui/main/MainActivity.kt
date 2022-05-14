@@ -108,7 +108,7 @@ class MainActivity : BaseActivity() {
                         this@MainActivity, viewModel, resultList as List<ResultsItem>,
                         object : PopularMoviesItemListener {
                             override fun onItemClicked(id: Int?) {
-                                MovieDetailActivity.createSimpleIntent(this@MainActivity,id!!)
+                                startActivity(MovieDetailActivity.createSimpleIntent(this@MainActivity, id))
                             }
                         }
                     )
