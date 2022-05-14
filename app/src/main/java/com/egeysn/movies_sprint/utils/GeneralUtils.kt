@@ -11,6 +11,10 @@ class GeneralUtils(private val context: Context) {
         return (dp * scale + 0.5f).toInt()
     }
 
+    fun screenWidth(): Int = context.resources.displayMetrics.widthPixels
+
+    fun screenHeight(): Int = context.resources.displayMetrics.heightPixels
+
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
