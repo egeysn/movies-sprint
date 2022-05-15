@@ -12,6 +12,7 @@ import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PersonsItemBinding
+import com.egeysn.movies_sprint.ui.personDetail.PersonDetailActivity
 
 class PersonAdapter(
     private val context: Context,
@@ -68,6 +69,10 @@ class PersonAdapter(
                 .placeholder(progress)
                 .centerCrop()
                 .into(binding.imageIv)
+
+            binding.root.setOnClickListener {
+                context.startActivity(PersonDetailActivity.createSimpleIntent(context, item.id))
+            }
         }
 
         private fun dpToPx(context: Context, dp: Int): Int {

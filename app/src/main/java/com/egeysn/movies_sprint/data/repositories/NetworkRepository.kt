@@ -38,4 +38,14 @@ class NetworkRepository @Inject constructor(
                 )
             }
         }
+
+    fun getPersonDetail(id: Int) =
+        performOperation {
+            getResult {
+                apiService.personDetail(
+                    id,
+                    BuildConfig.API_KEY
+                )
+            }
+        }
 }

@@ -1,6 +1,7 @@
 package com.egeysn.movies_sprint.data.remote
 
 import com.egeysn.movies_sprint.data.response.MovieResponse
+import com.egeysn.movies_sprint.data.response.PersonDetailResponse
 import com.egeysn.movies_sprint.data.response.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -25,4 +26,10 @@ interface ApiService {
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,
     ): Response<MovieResponse>
+
+    @GET("person/{id}")
+    suspend fun personDetail(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+    ): Response<PersonDetailResponse>
 }
