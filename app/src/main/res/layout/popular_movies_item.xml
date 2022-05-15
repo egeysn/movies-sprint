@@ -50,10 +50,14 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/roboto_700"
-                 android:maxLines="1"
+                 android:maxLines="2"
+                 android:layout_weight="2"
+                 android:autoSizeTextType="uniform"
+                 android:autoSizeMinTextSize="12sp"
+                 android:ellipsize="end"
                  android:textColor="@color/white"
                  android:textSize="15sp"
-                 tools:text="Breaking Bad" />
+                 tools:text="Breaking Bad Breaking Bad Breakng Bad BreakingBadBreakingBAD alsdlsdasldkl" />
 
              <TextView
                  android:id="@+id/date_tv"
@@ -62,6 +66,7 @@
                  android:layout_height="wrap_content"
                  android:fontFamily="@font/roboto_400"
                  android:maxLines="1"
+                 android:ellipsize="end"
                  android:textColor="@color/gray8"
                  android:textSize="13sp"
                  tools:text="(2016)" />
@@ -92,6 +97,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/roboto_400"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 tools:text="2021 2h35 13+" />
