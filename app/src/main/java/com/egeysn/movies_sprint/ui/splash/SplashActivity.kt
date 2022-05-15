@@ -1,31 +1,43 @@
 package com.egeysn.movies_sprint.ui.splash
 
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.viewModels
-import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.common.BaseActivity
+import com.egeysn.movies_sprint.databinding.ActivitySplashBinding
 import com.egeysn.movies_sprint.ui.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
     private val viewModel: SplashActivityViewModel by viewModels()
 
+    lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         waitAndNavigate()
     }
 
     private fun waitAndNavigate() {
-        showLoading()
-        val handler = Handler()
-        handler.postDelayed(
-            Runnable {
-                startActivity(MainActivity.createSimpleIntent(this))
-            },
-            2000
-        )
+
+        binding.animationView.addAnimatorListener(object: Animator.AnimatorListener{
+            override fun onAnimationStart(p0: Animator?) {
+            }
+
+            override fun onAnimationEnd(p0: Animator?) {
+                startActivity(MainActivity.createSimpleIntent(this@SplashActivity))
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+
+        })
+
     }
 }
