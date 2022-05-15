@@ -6,13 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.bumptech.glide.Glide
-import com.egeysn.movies_sprint.BuildConfig
-import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PersonsItemBinding
 import com.egeysn.movies_sprint.ui.personDetail.PersonDetailActivity
+import com.egeysn.movies_sprint.utils.GlideHelper
 
 class PersonAdapter(
     private val context: Context,
@@ -55,20 +52,7 @@ class PersonAdapter(
                 }
             }
 
-            // create a ProgressDrawable object which we will show as placeholder
-            val progress = CircularProgressDrawable(binding.root.context)
-            progress.setColorSchemeColors(
-                R.color.red_accent,
-            )
-            progress.centerRadius = 30f
-            progress.strokeWidth = 5f
-            progress.start()
-
-            Glide.with(context)
-                .load(BuildConfig.BASE_IMAGE_URL + item.profile_path)
-                .placeholder(progress)
-                .centerCrop()
-                .into(binding.imageIv)
+            GlideHelper.loadImage(context, item.profile_path, binding.imageIv)
 
             binding.root.setOnClickListener {
                 context.startActivity(PersonDetailActivity.createSimpleIntent(context, item.id))

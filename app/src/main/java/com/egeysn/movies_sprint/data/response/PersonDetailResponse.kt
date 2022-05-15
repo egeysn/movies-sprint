@@ -6,7 +6,7 @@ data class PersonDetailResponse(
     val gender: Int?,
     val imdbId: Any?,
     val known_for_department: String?,
-    val profile_path: Any?,
+    val profile_path: String?,
     val biography: String?,
     val deathday: Any?,
     val placeOfBirth: Any?,

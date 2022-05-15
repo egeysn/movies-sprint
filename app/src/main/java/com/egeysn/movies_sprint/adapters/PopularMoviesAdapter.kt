@@ -6,13 +6,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.bumptech.glide.Glide
-import com.egeysn.movies_sprint.BuildConfig
-import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PopularMoviesItemBinding
 import com.egeysn.movies_sprint.ui.main.MainViewModel
+import com.egeysn.movies_sprint.utils.GlideHelper
 
 class PopularMoviesAdapter(
     private val context: Context,
@@ -53,7 +50,7 @@ class PopularMoviesAdapter(
                     binding.root.layoutParams = params
                 }
                 size - 1 -> {
-                    params.topMargin = 0
+                    params.topMargin = viewModel.utils.dpToPx(10f)
                     params.bottomMargin =
                         viewModel.utils.dpToPx(30f)
                     binding.root.layoutParams = params
@@ -67,21 +64,7 @@ class PopularMoviesAdapter(
             binding.titleTv.text = item.original_title
             binding.voteTv.text = "Point: ${item.vote_average}"
 
-            // create a ProgressDrawable object which we will show as placeholder
-            val progress = CircularProgressDrawable(binding.root.context)
-            progress.setColorSchemeColors(
-                R.color.red_accent,
-            )
-            progress.centerRadius = 30f
-            progress.strokeWidth = 5f
-            progress.start()
-
-            Glide.with(context)
-                .load(BuildConfig.BASE_IMAGE_URL + item.poster_path)
-                .placeholder(progress)
-                .centerCrop()
-                .error(R.drawable.ic_baseline_error_outline_24)
-                .into(binding.imageIv)
+            GlideHelper.loadImage(context, item.poster_path, binding.imageIv)
 
             binding.root.setOnClickListener {
                 listener?.onItemClicked(item.id)

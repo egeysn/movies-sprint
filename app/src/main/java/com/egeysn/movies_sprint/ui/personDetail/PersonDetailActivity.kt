@@ -15,6 +15,7 @@ import com.egeysn.movies_sprint.data.common.BaseActivity
 import com.egeysn.movies_sprint.data.response.MovieResponse
 import com.egeysn.movies_sprint.data.response.PersonDetailResponse
 import com.egeysn.movies_sprint.databinding.ActivityPersonDetailBinding
+import com.egeysn.movies_sprint.utils.GlideHelper
 import com.egeysn.movies_sprint.utils.Resource
 import com.egeysn.movies_sprint.utils.toYear
 import timber.log.Timber
@@ -69,21 +70,8 @@ class PersonDetailActivity() : BaseActivity() {
             val posterWidth = utils.screenWidth()
             binding.posterIv.layoutParams =
                 LinearLayout.LayoutParams(posterWidth, (posterWidth * (1.3)).toInt())
-            // create a ProgressDrawable object which we will show as placeholder
-            val progress = CircularProgressDrawable(binding.root.context)
-            progress.setColorSchemeColors(
-                R.color.red_accent,
-            )
-            progress.centerRadius = 30f
-            progress.strokeWidth = 5f
-            progress.start()
 
-            Glide.with(this)
-                .load(BuildConfig.BASE_IMAGE_URL + response.profile_path)
-                .placeholder(progress)
-                .centerCrop()
-                .error(R.drawable.ic_baseline_error_outline_24)
-                .into(binding.posterIv)
+            GlideHelper.loadImage(this, response.profile_path, binding.posterIv)
 
             binding.infoTv.text = response.known_for_department
             binding.descTv.text = response.biography ?: "Not found a biography"
