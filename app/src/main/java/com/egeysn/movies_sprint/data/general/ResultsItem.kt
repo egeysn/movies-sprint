@@ -8,7 +8,7 @@ data class ResultsItem(
     val genreIds: List<Int?>?,
     val poster_path: String?,
     val backdrop_path: String?,
-    val releaseDate: String?,
+    val release_date: String?,
     val popularity: Double?,
     val vote_average: Double?,
     val id: Int?,

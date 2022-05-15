@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="10dp"
     android:foreground="?selectableItemBackground"
     android:orientation="horizontal"
-    app:cardBackgroundColor="@color/search_background"
+    app:cardBackgroundColor="@color/primary"
     app:cardCornerRadius="12dp">
 
     <LinearLayout
@@ -41,21 +41,55 @@
             android:layout_marginHorizontal="12dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_tv"
-                android:layout_width="match_parent"
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+             <TextView
+                 android:id="@+id/title_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:fontFamily="@font/roboto_700"
+                 android:maxLines="1"
+                 android:textColor="@color/white"
+                 android:textSize="15sp"
+                 tools:text="Breaking Bad" />
+
+             <TextView
+                 android:id="@+id/date_tv"
+                 android:layout_marginHorizontal="6dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:fontFamily="@font/roboto_400"
+                 android:maxLines="1"
+                 android:textColor="@color/gray8"
+                 android:textSize="13sp"
+                 tools:text="(2016)" />
+
+         </LinearLayout>
+
+            <com.willy.ratingbar.ScaleRatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_700"
-                android:maxLines="1"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                tools:text="Breaking Bad" />
+                app:srb_drawableEmpty="@drawable/ic_star_empty"
+                app:srb_drawableFilled="@drawable/ic_star_filled"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                app:srb_clickable="false"
+                app:srb_isIndicator="true"
+                app:srb_minimumStars="1"
+                app:srb_numStars="5"
+                app:srb_starHeight="20dp"
+                app:srb_starPadding="1dp"
+                app:srb_starWidth="20dp"
+                app:srb_stepSize="0.5" />
 
             <TextView
-                android:id="@+id/vote_tv"
+                android:id="@+id/genre_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/roboto_400"
                 android:maxLines="1"
                 android:textColor="@color/white"

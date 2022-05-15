@@ -10,6 +10,7 @@ import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.PopularMoviesItemBinding
 import com.egeysn.movies_sprint.ui.main.MainViewModel
 import com.egeysn.movies_sprint.utils.GlideHelper
+import com.egeysn.movies_sprint.utils.toYear
 
 class PopularMoviesAdapter(
     private val context: Context,
@@ -40,7 +41,8 @@ class PopularMoviesAdapter(
 
             val params = binding.root.layoutParams as RecyclerView.LayoutParams
             val imageWidth = viewModel.utils.dpToPx(110f)
-            binding.imageCv.layoutParams = LinearLayout.LayoutParams(imageWidth, (imageWidth * (1.5)).toInt())
+            binding.imageCv.layoutParams =
+                LinearLayout.LayoutParams(imageWidth, (imageWidth * (1.5)).toInt())
 
             when (bindingAdapterPosition) {
                 0 -> {
@@ -61,14 +63,18 @@ class PopularMoviesAdapter(
                     binding.root.layoutParams = params
                 }
             }
-            binding.titleTv.text = item.original_title
-            binding.voteTv.text = "Point: ${item.vote_average}"
+            binding.apply {
+                GlideHelper.loadImage(context, item.poster_path, imageIv)
+                titleTv.text = item.original_title
+                dateTv.text = "(${item.release_date?.toYear()})"
+                ratingBar.rating = (item.vote_average ?: 0).toFloat() / 2f
 
-            GlideHelper.loadImage(context, item.poster_path, binding.imageIv)
-
-            binding.root.setOnClickListener {
-                listener?.onItemClicked(item.id)
+                root.setOnClickListener {
+                    listener?.onItemClicked(item.id)
+                }
             }
+            /*  val genresNameList = item.genres.map { it?.name }.toList()
+              val genresString = genresNameList.joinToString(",")*/
         }
     }
 }
