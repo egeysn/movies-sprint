@@ -98,4 +98,7 @@ dependencies {
     //joda
     implementation 'net.danlew:android.joda:2.10.14'
 
+    //Rating bar
+    implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
+
 }

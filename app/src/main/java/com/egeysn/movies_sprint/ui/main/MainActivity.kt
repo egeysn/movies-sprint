@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
-    var debouncePeriod: Long = 1000
+    var debouncePeriod: Long = 750
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
