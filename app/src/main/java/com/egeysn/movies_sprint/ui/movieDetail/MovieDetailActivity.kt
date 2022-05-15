@@ -7,10 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.bumptech.glide.Glide
-import com.egeysn.movies_sprint.BuildConfig
-import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.common.BaseActivity
 import com.egeysn.movies_sprint.data.response.MovieResponse
 import com.egeysn.movies_sprint.databinding.ActivityMovieDetailBinding
@@ -76,6 +72,7 @@ class MovieDetailActivity() : BaseActivity() {
             val genresString = genresNameList.joinToString(",")
             binding.infoTv.text = "${response.release_date?.toYear()} | $genresString "
             binding.descTv.text = response.overview
+            binding.ratingBar.rating = (response.vote_average ?: 0).toFloat() / 2f
         }
     }
     private fun listeners() {

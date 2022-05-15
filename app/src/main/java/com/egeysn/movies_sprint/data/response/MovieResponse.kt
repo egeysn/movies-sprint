@@ -22,7 +22,7 @@ data class MovieResponse(
     val spokenLanguages: List<SpokenLanguagesItem?>?,
     val productionCompanies: List<ProductionCompaniesItem?>?,
     val release_date: String?,
-    val voteAverage: Double?,
+    val vote_average: Double?,
     val belongsToCollection: BelongsToCollection?,
     val tagline: String?,
     val adult: Boolean?,
