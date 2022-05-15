@@ -7,9 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import com.egeysn.movies_sprint.adapters.CastItemListener
+import com.egeysn.movies_sprint.adapters.CastsAdapter
 import com.egeysn.movies_sprint.data.common.BaseActivity
+import com.egeysn.movies_sprint.data.response.CreditResponse
 import com.egeysn.movies_sprint.data.response.MovieResponse
 import com.egeysn.movies_sprint.databinding.ActivityMovieDetailBinding
+import com.egeysn.movies_sprint.ui.personDetail.PersonDetailActivity
 import com.egeysn.movies_sprint.utils.GlideHelper
 import com.egeysn.movies_sprint.utils.Resource
 import com.egeysn.movies_sprint.utils.toYear
@@ -28,7 +32,6 @@ class MovieDetailActivity() : BaseActivity() {
 
         setContentView(binding.root)
         setup()
-        listeners()
     }
 
     private fun setup() {
@@ -41,6 +44,7 @@ class MovieDetailActivity() : BaseActivity() {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     it.data?.let { it1 -> adjustUI(it1) }
+                    getCasts(id)
                     hideLoading()
                 }
                 Resource.Status.ERROR -> {
@@ -64,7 +68,7 @@ class MovieDetailActivity() : BaseActivity() {
 
             val posterWidth = utils.screenWidth()
             binding.posterIv.layoutParams =
-                LinearLayout.LayoutParams(posterWidth, (posterWidth * (1.3)).toInt())
+                LinearLayout.LayoutParams(posterWidth, (posterWidth * (1.1)).toInt())
 
             GlideHelper.loadImage(this, response.poster_path, binding.posterIv)
 
@@ -75,7 +79,39 @@ class MovieDetailActivity() : BaseActivity() {
             binding.ratingBar.rating = (response.vote_average ?: 0).toFloat() / 2f
         }
     }
-    private fun listeners() {
+    private fun getCasts(id: Int) {
+        viewModel.getCredits(id).observe(this) {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    it.data?.let { it1 -> onCreditsFetched(it1) }
+                    hideLoading()
+                }
+                Resource.Status.ERROR -> {
+                    Timber.e("onError : ${it.message}")
+                    hideLoading()
+                }
+                Resource.Status.LOADING -> {
+
+                    showLoading()
+                }
+            }
+        }
+    }
+
+    private fun onCreditsFetched(response: CreditResponse) {
+        if (response.cast.isNullOrEmpty()) {
+            binding.castContainer.visibility = View.GONE } else {
+            binding.castContainer.visibility = View.VISIBLE
+            val adapter = CastsAdapter(
+                this, response.cast,
+                object : CastItemListener {
+                    override fun onItemClicked(id: Int?) {
+                        startActivity(PersonDetailActivity.createSimpleIntent(this@MovieDetailActivity,id))
+                    }
+                }
+            )
+            binding.castRv.adapter = adapter
+        }
     }
 
     companion object {

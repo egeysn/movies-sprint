@@ -1,5 +1,6 @@
 package com.egeysn.movies_sprint.data.remote
 
+import com.egeysn.movies_sprint.data.response.CreditResponse
 import com.egeysn.movies_sprint.data.response.MovieResponse
 import com.egeysn.movies_sprint.data.response.PersonDetailResponse
 import com.egeysn.movies_sprint.data.response.SearchResponse
@@ -32,4 +33,10 @@ interface ApiService {
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,
     ): Response<PersonDetailResponse>
+
+    @GET("movie/{id}/credits")
+    suspend fun getCredits(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+    ): Response<CreditResponse>
 }

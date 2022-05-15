@@ -48,4 +48,14 @@ class NetworkRepository @Inject constructor(
                 )
             }
         }
+
+    fun getCredits(id: Int) =
+        performOperation {
+            getResult {
+                apiService.getCredits(
+                    id,
+                    BuildConfig.API_KEY
+                )
+            }
+        }
 }

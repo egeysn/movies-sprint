@@ -70,9 +70,10 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/roboto_700"
+                    android:text="@string/summary"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:text="@string/summary" />
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/desc_tv"
                     android:layout_width="wrap_content"
@@ -90,22 +91,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/roboto_700"
+                    android:text="@string/cast"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:text="@string/cast" />
+                    android:textSize="15sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cast_rv"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
