@@ -5,6 +5,7 @@ import android.content.Context
 import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.data.remote.ApiService
 import com.egeysn.movies_sprint.utils.GeneralUtils
+import com.egeysn.movies_sprint.utils.LoadingHelper
 import com.egeysn.movies_sprint.utils.NetworkUtils
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -114,6 +115,14 @@ object AppModule {
     fun provideGeneralUtils(@ApplicationContext context: Context): GeneralUtils {
         return GeneralUtils(context)
     }
+
+    @Singleton
+    @Provides
+    fun provideLoadingHelper(): LoadingHelper {
+        return LoadingHelper.getInstance()
+    }
+
+
 
 
 }

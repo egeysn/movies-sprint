@@ -23,12 +23,14 @@ class SplashActivity : BaseActivity() {
 
     private fun waitAndNavigate() {
 
-        binding.animationView.addAnimatorListener(object: Animator.AnimatorListener{
+        binding.animationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(p0: Animator?) {
             }
 
             override fun onAnimationEnd(p0: Animator?) {
+
                 startActivity(MainActivity.createSimpleIntent(this@SplashActivity))
+                finish()
             }
 
             override fun onAnimationCancel(p0: Animator?) {
@@ -36,8 +38,6 @@ class SplashActivity : BaseActivity() {
 
             override fun onAnimationRepeat(p0: Animator?) {
             }
-
         })
-
     }
 }

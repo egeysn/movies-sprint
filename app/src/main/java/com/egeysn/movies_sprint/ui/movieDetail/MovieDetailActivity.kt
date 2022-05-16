@@ -91,7 +91,6 @@ class MovieDetailActivity() : BaseActivity() {
                     hideLoading()
                 }
                 Resource.Status.LOADING -> {
-
                     showLoading()
                 }
             }

@@ -8,25 +8,31 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity() : AppCompatActivity() {
+
+    @Inject
+    lateinit var loadingHelper: LoadingHelper
 
     @Inject
     lateinit var utils: GeneralUtils
 
-    private lateinit var loadingHelper: LoadingHelper
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadingHelper = LoadingHelper.getInstance(this@BaseActivity)
-    }
-
-    fun showLoading() {
-        runOnUiThread {
-            loadingHelper.showDialog()
+        try {
+            loadingHelper.register(this)
+        } catch (e: Exception) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
+    fun showLoading() {
+        loadingHelper.showDialog()
+    }
+
     fun hideLoading() {
-        runOnUiThread { loadingHelper.hideDialog() }
+        loadingHelper.hideDialog()
     }
 }

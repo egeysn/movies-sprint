@@ -8,20 +8,22 @@ import android.view.Window
 import com.egeysn.movies_sprint.R
 
 @SuppressLint("InflateParams")
-class LoadingHelper(private var context: Context) {
-    private var dialog: Dialog = Dialog(context, R.style.MyAlertDialogStyle)
+class LoadingHelper() {
 
-    init {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(LayoutInflater.from(context).inflate(R.layout.progress_dialog, null))
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.setCancelable(false)
+    private var dialog: Dialog? = null
+
+    fun register(context: Context) {
+        dialog = Dialog(context, R.style.MyAlertDialogStyle)
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.setContentView(LayoutInflater.from(context).inflate(R.layout.progress_dialog, null))
+        dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
     }
 
     fun showDialog() {
         try {
-            if (!dialog.isShowing) {
-                dialog.show()
+            if (dialog != null && !dialog!!.isShowing) {
+                dialog?.show()
             }
         } catch (e: Exception) {
         }
@@ -29,7 +31,7 @@ class LoadingHelper(private var context: Context) {
 
     fun hideDialog() {
         try {
-            dialog.dismiss()
+            dialog?.dismiss()
         } catch (e: java.lang.Exception) {
         }
     }
@@ -39,8 +41,8 @@ class LoadingHelper(private var context: Context) {
         @Volatile
         private var instance: LoadingHelper? = null
 
-        fun getInstance(context: Context) = instance ?: synchronized(this) {
-            instance ?: LoadingHelper(context).also { instance = it }
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: LoadingHelper().also { instance = it }
         }
     }
 }

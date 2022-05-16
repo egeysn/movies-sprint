@@ -60,7 +60,6 @@ class MainActivity : BaseActivity() {
                     hideLoading()
                 }
                 Resource.Status.LOADING -> {
-
                     showLoading()
                 }
             }
