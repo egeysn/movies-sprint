@@ -1,7 +1,6 @@
 package com.egeysn.movies_sprint.common
 
-import android.os.Bundle
-import android.view.View
+
 import androidx.fragment.app.Fragment
 import com.egeysn.movies_sprint.utils.LoadingHelper
 import dagger.hilt.android.AndroidEntryPoint

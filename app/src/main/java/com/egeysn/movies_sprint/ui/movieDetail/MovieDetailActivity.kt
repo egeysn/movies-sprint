@@ -66,15 +66,16 @@ class MovieDetailActivity() : BaseActivity() {
             binding.emptyBody.visibility = View.GONE
             binding.body.visibility = View.VISIBLE
 
-            val posterWidth = utils.screenWidth()
+            val posterWidth = utils.dpToPx(110f)
             binding.posterIv.layoutParams =
-                LinearLayout.LayoutParams(posterWidth, (posterWidth * (1.1)).toInt())
+                LinearLayout.LayoutParams(posterWidth, (posterWidth * (1.5)).toInt())
 
             GlideHelper.loadImage(this, response.poster_path, binding.posterIv)
 
             val genresNameList = response.genres.map { it?.name }.toList()
             val genresString = genresNameList.joinToString(",")
-            binding.infoTv.text = "${response.release_date?.toYear()} | $genresString "
+            binding.genresTv.text = genresString
+            binding.releaseDateTv.text = "${response.release_date?.toYear()}"
             binding.descTv.text = response.overview
             binding.ratingBar.rating = (response.vote_average ?: 0).toFloat() / 2f
         }
