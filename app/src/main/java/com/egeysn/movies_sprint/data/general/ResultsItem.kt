@@ -15,5 +15,7 @@ data class ResultsItem(
     val adult: Boolean?,
     val voteCount: Int?,
     val media_type: String?,
-    val profile_path: String?
+    val profile_path: String?,
+    val known_for_department: String?,
+    val name: String?
 )

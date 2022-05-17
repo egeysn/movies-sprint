@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/primary"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
@@ -21,5 +23,30 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/place_holder" />
     </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_700"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="Grand Theft Auto V" />
+
+    <TextView
+
+        android:id="@+id/known_for_department_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/roboto_400"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/gray8"
+        android:textSize="13sp"
+        tools:text="Action,Fantasy,Fantasy,FantasyFantasy,Fantasy Fantasy" />
 
 </LinearLayout>

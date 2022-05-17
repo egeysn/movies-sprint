@@ -53,6 +53,8 @@ class PersonAdapter(
             }
 
             GlideHelper.loadImage(context, item.profile_path, binding.imageIv)
+            binding.nameTv.text = item.name
+            binding.knownForDepartmentTv.text = item.known_for_department
 
             binding.root.setOnClickListener {
                 context.startActivity(PersonDetailActivity.createSimpleIntent(context, item.id))

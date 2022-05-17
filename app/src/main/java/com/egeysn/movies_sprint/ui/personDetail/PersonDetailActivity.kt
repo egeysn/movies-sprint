@@ -75,9 +75,14 @@ class PersonDetailActivity() : BaseActivity() {
 
             binding.infoTv.text = response.known_for_department
             binding.descTv.text = response.biography ?: "Not found a biography"
+            binding.personTitleTv.text = response.name
         }
     }
     private fun listeners() {
+        binding.arrowBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     companion object {

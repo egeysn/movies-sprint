@@ -17,13 +17,14 @@ import com.egeysn.movies_sprint.data.response.MovieResponse
 import com.egeysn.movies_sprint.data.response.MovieVideosResponse
 import com.egeysn.movies_sprint.databinding.ActivityMovieDetailBinding
 import com.egeysn.movies_sprint.ui.personDetail.PersonDetailActivity
-import com.egeysn.movies_sprint.ui.personDetail.PersonDetailActivity.Companion.MOVIE_ID
 import com.egeysn.movies_sprint.utils.GlideHelper
 import com.egeysn.movies_sprint.utils.Resource
 import com.egeysn.movies_sprint.utils.ZoomOutPageTransformer
 import com.egeysn.movies_sprint.utils.toYear
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import timber.log.Timber
 import java.util.*
 
@@ -49,7 +50,14 @@ class MovieDetailActivity() : BaseActivity() {
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        listeners()
         setup()
+    }
+
+    private fun listeners() {
+        binding.arrowBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setup() {
@@ -114,6 +122,7 @@ class MovieDetailActivity() : BaseActivity() {
             val genresString = genresNameList.joinToString(",")
             binding.apply {
                 titleTv.text = response.original_title
+                movieTitleTv.text = response.original_title
                 genresTv.text = genresString
                 releaseDateTv.text = "${response.release_date?.toYear()}"
                 descTv.text = response.overview
