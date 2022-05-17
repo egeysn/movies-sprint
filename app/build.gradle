@@ -104,4 +104,7 @@ dependencies {
     //lottie
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //video player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.26'
+
 }

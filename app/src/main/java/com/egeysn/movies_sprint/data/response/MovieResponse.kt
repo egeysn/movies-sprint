@@ -16,7 +16,7 @@ data class MovieResponse(
     val voteCount: Int?,
     val budget: Int?,
     val overview: String?,
-    val originalTitle: String?,
+    val original_title: String?,
     val runtime: Int?,
     val poster_path: String?,
     val spokenLanguages: List<SpokenLanguagesItem?>?,

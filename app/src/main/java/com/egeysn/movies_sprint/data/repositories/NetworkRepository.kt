@@ -58,4 +58,14 @@ class NetworkRepository @Inject constructor(
                 )
             }
         }
+
+    fun getMovieTrailers(id: Int) =
+        performOperation {
+            getResult {
+                apiService.getMovieTrailers(
+                    id,
+                    BuildConfig.API_KEY
+                )
+            }
+        }
 }

@@ -11,6 +11,7 @@ import com.egeysn.movies_sprint.BuildConfig
 import com.egeysn.movies_sprint.R
 import com.egeysn.movies_sprint.data.general.ResultsItem
 import com.egeysn.movies_sprint.databinding.MoviesItemBinding
+import com.egeysn.movies_sprint.ui.movieDetail.MovieDetailActivity
 import com.egeysn.movies_sprint.utils.GlideHelper
 
 class TvShowsAdapter(
@@ -56,7 +57,9 @@ class TvShowsAdapter(
 
             GlideHelper.loadImage(context, item.poster_path, binding.imageIv)
 
-            binding.root.setOnClickListener { }
+            binding.root.setOnClickListener {
+                context.startActivity(MovieDetailActivity.createSimpleIntent(context, item.id))
+            }
         }
 
         private fun dpToPx(context: Context, dp: Int): Int {

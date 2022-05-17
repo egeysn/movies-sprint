@@ -1,5 +1,6 @@
 package com.egeysn.movies_sprint.data.common
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.egeysn.movies_sprint.utils.GeneralUtils
@@ -17,7 +18,9 @@ open class BaseActivity() : AppCompatActivity() {
     lateinit var utils: GeneralUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
+
         try {
             loadingHelper.register(this)
         } catch (e: Exception) {
